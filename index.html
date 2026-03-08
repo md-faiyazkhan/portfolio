@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Faiyaz Khan Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
+    <style>
+        :root { --primary: #10b981; --bg: #030712; --text: #f3f4f6; }
+        .light-mode { --primary: #059669; --bg: #f9fafb; --text: #111827; }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); color: var(--text);
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        /* Neon Glow Effect on Titles */
+        h1, h3, h4 { text-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px);
+            background-size: 30px 30px; opacity: 0.05; z-index: -1;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-panel:hover {
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .light-mode .glass-panel { background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(5, 150, 105, 0.1); }
+
+        .terminal-text::before { content: "> "; color: var(--primary); }
+
+        .scan-line {
+            width: 100%; height: 2px; background: var(--primary);
+            position: absolute; opacity: 0.1; animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .theme-toggle { cursor: pointer; transition: 0.3s transform; }
+        .typing::after { content: '|'; animation: blink 0.7s infinite; }
+
+        /* Floating Particles */
+        @keyframes float {
+            0% { transform: translateY(0px) translateX(0px); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+        }
+
+        .particle {
+            position: fixed; /* fixed se absolute change kiya */
+            color: var(--primary);
+            font-family: 'JetBrains Mono';
+            font-size: 10px;
+            pointer-events: none;
+            z-index: -1; /* Background layer pe rakha */
+            animation: float 10s linear infinite;
+            opacity: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 5% 0%, rgba(16, 185, 129, 0.40) 0px, transparent 30%),
+                radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+            color: var(--text);
+            min-height: 100vh;
+            position: relative; 
+            overflow-x: hidden;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background-color: var(--primary);
+            width: 0%;
+            z-index: 10000;
+            transition: background-color 0.3s ease; /* Theme change ke liye */
+        }
+
+    </style>
+</head>
+<body class="selection:bg-emerald-500/30">
+
+    <div class="grid-bg"></div>
+
+    <!-- <div class="custom-cursor"></div> -->
+
+    <div class="scroll-progress-bar"></div>
+
+    <nav class="fixed top-0 w-full z-50 p-6">
+    <div class="max-w-6xl mx-auto flex justify-between items-center glass-panel px-8 py-4 rounded-2xl">
+        <a href="/" class="mono font-extrabold text-lg tracking-tighter hover:text-emerald-500 transition-colors">
+            FaiyazKhan<span class="text-emerald-500 italic">.in</span>
+        </a>
+        
+        <div class="flex items-center gap-8">
+            <div class="hidden md:flex gap-6 text-[10px] uppercase font-bold tracking-widest opacity-60">
+                <a href="#models" class="hover:text-emerald-500 transition">Models</a>
+                <a href="#stack" class="hover:text-emerald-500 transition">Stack</a>
+                <a href="mailto:faiyazkhan.work@gmail.com" class="hover:text-emerald-500 transition">Contact</a>
+            </div>
+            <div onclick="toggleTheme()" class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 hover:bg-emerald-500/10 transition-all cursor-pointer">
+                <span class="text-[9px] uppercase font-bold tracking-widest opacity-60 leading-none">Theme</span>
+                <span class="text-lg leading-none">🌓</span>
+            </div>
+        </div>
+    </div>
+    </nav>
+
+    <header class="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden">
+        <div class="scan-line"></div>
+
+        <div class="loading-container w-full max-w-md mx-auto mt-10">
+            <div class="flex justify-between text-[10px] mono text-emerald-500 mb-2">
+                <span>INITIALIZING_CAREER_PATH</span>
+                <span id="percent">0%</span>
+            </div>
+            <div class="bar-bg w-full h-2 bg-emerald-900/20 rounded-full relative">
+                <div id="progress-bar" class="h-full bg-emerald-500 rounded-full" style="width: 0%"></div>
+                <div id="robot" class="absolute top-[-15px] text-lg transition-all duration-300" style="left: 0%">🤖</div>
+            </div>
+        </div><br></br>
+
+        <div data-aos="fade-down" class="mono text-emerald-500 text-[9px] md:text-xs mb-4 tracking-[0.05em] md:tracking-[0.3em] text-center px-2 whitespace-nowrap">
+            [ system_status: autonomous_intelligence_active ]
+        </div>
+        
+        <h1 data-aos="zoom-in" class="text-5xl md:text-8xl font-black tracking-tighter md:tracking-[-0.05em] text-center leading-none break-words">
+            INTELLIGENCE <br> 
+            <span id="typewriter" class="text-transparent typing mt-2 md:mt-4 block" style="-webkit-text-stroke: 1px var(--text); opacity: 0.4;"></span>
+        </h1>
+
+        <p data-aos="fade-up" data-aos-delay="200" class="mt-8 max-w-2xl text-center opacity-60 text-fluid font-light leading-relaxed px-4">
+            Designing the next generation of smart algorithms. Bridging the gap between raw data and cognitive machines. 
+            <span class="text-emerald-500 font-bold">Innovation in progress.</span>
+        </p>
+
+        <div data-aos="fade-up" data-aos-delay="400" class="mt-12 flex flex-row gap-2 sm:gap-4 justify-center items-center px-2">
+            <a href="#models" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl font-bold transition-all text-sm sm:text-base whitespace-nowrap">
+                Explore Intelligence
+            </a>
+            
+            <button class="glass-panel px-4 sm:px-8 py-3 sm:py-4 rounded-xl font-bold border-emerald-500/20 hover:bg-emerald-500/10 transition-all text-sm sm:text-base whitespace-nowrap">
+                Download CV
+            </button>
+        </div>
+    </header>
+
+    <section id="models" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+            
+            <div data-aos="fade-right" class="md:col-span-8 glass-panel p-10 rounded-[2rem] relative overflow-hidden group">
+                <div class="mono text-emerald-500 text-[10px] mb-4 uppercase tracking-widest">Training_Model_01</div>
+                <h3 class="text-4xl font-extrabold mb-4">Neural Network <br> Architectures</h3>
+                <p class="opacity-50 max-w-md">Mastering deep learning frameworks to build robust and scalable predictive models.</p>
+                <div class="mt-8 flex gap-4 text-3xl">
+                    <i class="devicon-python-plain colored"></i>
+                    <i class="devicon-pytorch-original"></i>
+                    <i class="devicon-tensorflow-original colored"></i>
+                </div>
+            </div>
+
+            <div data-aos="fade-left" class="md:col-span-4 glass-panel p-10 rounded-[2rem] flex flex-col justify-center text-center">
+                <div class="text-6xl font-black text-emerald-500" id="counter">0</div>
+                <p class="mono text-[10px] opacity-40 uppercase tracking-widest mt-2">Parameters Optimized</p>
+            </div>
+
+            <div id="stack" data-aos="fade-up" class="md:col-span-5 glass-panel p-10 rounded-[2rem]">
+                <h4 class="mono text-sm font-bold mb-6 italic text-emerald-500 underline">Computational_Stack:</h4>
+                <ul class="space-y-3 opacity-70 mono text-sm">
+                    <li class="terminal-text">Natural Language Processing</li>
+                    <li class="terminal-text">Regression & Classification</li>
+                    <li class="terminal-text">Scikit-Learn / Pandas / NumPy</li>
+                    <li class="terminal-text">Deep Learning (GANs)</li>
+                </ul>
+            </div>
+
+            <div data-aos="fade-up" data-aos-delay="100" class="md:col-span-7 glass-panel p-10 rounded-[2rem] flex flex-col justify-between bg-emerald-500/5 border-emerald-500/30">
+                <h3 class="text-2xl font-bold">Ready to analyze complex data patterns?</h3>
+                <div class="flex justify-between items-center mt-10">
+                    <span class="mono text-xs opacity-50 underline cursor-pointer hover:text-emerald-500">faiyazkhan.in/repo</span>
+                    <a href="mailto:faiyazkhan.work@gmail.com" 
+                        class="bg-emerald-500 text-black px-4 sm:px-8 py-2 sm:py-4 rounded-xl font-bold transition-all text-xs sm:text-base whitespace-nowrap hover:bg-emerald-400">
+                        Initialize Chat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-none border-emerald-500/10">
+        <div class="mono text-[10px] opacity-30 tracking-[0.5em] mb-4">DEVELOPED_BY: MD_FAIYAZ_KHAN.</div>
+        <div class="flex justify-center gap-6 text-xs opacity-60 mb-8">
+            <a href="https://github.com/md-faiyazkhan" class="hover:text-emerald-500 transition">GitHub</a>
+            <a href="https://www.kaggle.com/faiyazcoder" class="hover:text-emerald-500 transition">Kaggle</a>
+            <a href="https://www.linkedin.com/in/mdfaiyazkhan/" class="hover:text-emerald-500 transition">LinkedIn</a>
+        </div>
+
+        <p class="mono text-[8px] opacity-20">SYSTEM_STABLE // CONNECTIVITY_READY</p>
+        
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        
+
+        // Scroll Progress Bar Logic
+        const progressBar = document.querySelector('.scroll-progress-bar');
+
+        window.addEventListener('scroll', () => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPosition = window.scrollY;
+            const progress = (scrollPosition / totalHeight) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+
+        function toggleTheme() { document.body.classList.toggle('light-mode'); }
+
+        const textElement = document.getElementById('typewriter');
+        const phrases = ['LEARNING PATTERNS.', 'AUTONOMOUS AGENTS.', 'FUTURE OF AI.', 'NEXT-GEN MODELS.'];  
+        let phraseIdx = 0, charIdx = 0, isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIdx];
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                isDeleting = true; setTimeout(type, 2000);
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 80 : 150);
+            }
+        }
+        type();
+
+        const counterEl = document.getElementById('counter');
+        let count = 0;
+        const target = 1500;
+
+        function updateCounter() {
+            if(count < target) { 
+                count += 17; 
+                counterEl.innerText = count + "k+"; 
+                requestAnimationFrame(updateCounter); 
+            } else { 
+                counterEl.innerText = "1.5M+"; 
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        observer.observe(counterEl);
+
+        const terms = [
+            'RandomForest', 'GradientDescent', 'NeuralNet', 'CNN', 'LinearRegression', 
+            '0101', 'f(x)', 'PyTorch', 'TensorFlow', 'BackProp', 'Sigmoid', 'ReLU', 
+            'Epochs', 'Weights', 'Bias', 'Loss', 'K-Means', 'SVM', 'DeepLearning', 'Transformer',
+            'Attention', 'Embeddings', 'FineTuning', 'Dropout', 'Inference', 'Stochastic', 
+            'GradientClip', 'GANs', 'Tokenization', 'Logits', 'JAX', 'ONNX', 'Scikit', 'AttentionMask'
+        ];
+
+        function createParticles() {
+            // 1. Ek container create karo
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = '100%';
+            container.style.zIndex = '-1'; /* Background ke piche */
+            container.style.pointerEvents = 'none';
+            document.body.prepend(container); // Body ke shuru mein daalo
+
+            for (let i = 0; i < 40; i++) { 
+                const span = document.createElement('span');
+                span.classList.add('particle');
+                span.innerText = terms[Math.floor(Math.random() * terms.length)];
+                
+                span.style.left = Math.random() * 100 + 'vw';
+                span.style.top = Math.random() * 100 + 'vh'; // Random start height
+                span.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                span.style.animationDelay = (Math.random() * 10) + 's';
+                
+                container.appendChild(span);
+            }
+        }
+        createParticles();
+
+            (function() {
+        // 1. Unique names ka use karein taaki clash na ho
+        const careerProgressBar = document.getElementById('progress-bar');
+        const careerRobot = document.getElementById('robot');
+        const percentText = document.getElementById('percent');
+        
+        let progress = 0;
+        const target = 78; 
+
+        function startLoading() {
+            if (progress < target) {
+                progress++;
+                if (careerProgressBar) careerProgressBar.style.width = progress + '%';
+                if (careerRobot) careerRobot.style.left = (progress - 2) + '%';
+                if (percentText) percentText.innerText = progress + '%';
+                
+                setTimeout(startLoading, 50); 
+            } else {
+                if (percentText) {
+                    percentText.innerHTML = "78% <span class='animate-pulse'>[IN_PROGRESS]</span>";
+                }
+            }
+        }
+        
+        // Check karein ki elements exist karte hain ya nahi
+        if (careerProgressBar && careerRobot) {
+            startLoading();
+        }
+    })();
+    </script>
+</body>
+</html>
