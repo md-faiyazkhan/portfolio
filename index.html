@@ -80,26 +80,14 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes blink { 50% { opacity: 0; } }
 
-        .theme-toggle {
-            /* Mobile blue/green highlight hatane ke liye */
-            -webkit-tap-highlight-color: transparent !important;
-            -webkit-touch-callout: none !important;
-            user-select: none !important;
-            outline: none !important;
-        }
+        .theme-toggle { cursor: pointer; transition: 0.3s transform; }
+        .typing::after { content: '|'; animation: blink 0.7s infinite; }
 
-        /* Ye rule ensure karega ki click ke baad border wapas faint ho jaye */
-        .theme-toggle:focus, .theme-toggle:focus-visible {
-            border-color: rgba(16, 185, 129, 0.2) !important;
-            background-color: transparent !important;
-        }
-
-        /* Sirf Desktop par hover dikhega */
-        @media (hover: hover) {
-            .theme-toggle:hover {
-                border-color: #10b981 !important;
-                background-color: rgba(16, 185, 129, 0.1) !important;
-            }
+        /* Floating Particles */
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(0); opacity: 0; }
         }
 
         .particle {
@@ -211,9 +199,9 @@
                 <a href="#stack" class="hover:text-emerald-500 transition">Stack</a>
                 <a href="mailto:faiyazkhan.work@gmail.com" class="hover:text-emerald-500 transition">Contact</a>
             </div>
-            <div onclick="toggleTheme()" class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 active:bg-emerald-500/10 active:border-emerald-500 transition-all cursor-pointer outline-none select-none">
-                <span class="text-[9px] uppercase font-bold tracking-widest opacity-60 leading-none pointer-events-none">Theme</span>
-                <span class="text-lg leading-none pointer-events-none">🌓</span>
+            <div onclick="toggleTheme()" class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 hover:bg-emerald-500/10 transition-all cursor-pointer">
+                <span class="text-[9px] uppercase font-bold tracking-widest opacity-60 leading-none">Theme</span>
+                <span class="text-lg leading-none">🌓</span>
             </div>
         </div>
     </div>
@@ -229,6 +217,8 @@
             </div>
             <div class="bar-bg w-full h-2 bg-emerald-900/20 rounded-full relative">
                 <div id="progress-bar" class="h-full bg-emerald-500 rounded-full" style="width: 0%"></div>
+                <!-- <div id="robot" class="absolute top-[-15px] text-lg transition-all duration-300" style="left: 0%">🤖</div> -->
+                <!-- top value ko -22px ya -24px set karein -->
                 <div id="robot" class="absolute top-[-10px] text-lg leading-none" style="left: 0%; transform: translateX(-50%);">🤖</div>
             </div>
         </div><br></br>
@@ -330,19 +320,20 @@
 
 
         function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            
-            // Previous fixes (Repaint)
-            document.body.style.display = 'none';
-            document.body.offsetHeight;
-            document.body.style.display = 'block';
+            const body = document.body;
+            body.classList.toggle('light-mode');
 
-            // Instant Focus Clear
-            setTimeout(() => {
-                if (document.activeElement) {
-                    document.activeElement.blur();
-                }
-            }, 50); // 50ms ka delay browser ko reset karne mein help karta hai
+            // 1. Force Reflow: Ye browser ko recalculate karne pe majboor karta hai
+            const offset = body.offsetHeight; 
+            
+            // 2. Mobile Repaint Fix: Scroll position ko 1px hila kar wapas lana
+            window.scrollBy(0, 1);
+            window.scrollBy(0, -1);
+
+            // 3. (Optional) Agar ab bhi na ho, toh inline style toggle
+            body.style.display = 'none';
+            body.offsetHeight; // ye line browser ko "wake up" bolti hai
+            body.style.display = 'block';
         }
 
 
@@ -429,6 +420,35 @@
         }
         createParticles();
 
+    //         (function() {
+    //     // 1. Unique names ka use karein taaki clash na ho
+    //     const careerProgressBar = document.getElementById('progress-bar');
+    //     const careerRobot = document.getElementById('robot');
+    //     const percentText = document.getElementById('percent');
+        
+    //     let progress = 0;
+    //     const target = 78; 
+
+    //     function startLoading() {
+    //         if (progress < target) {
+    //             progress++;
+    //             if (careerProgressBar) careerProgressBar.style.width = progress + '%';
+    //             if (careerRobot) careerRobot.style.left = (progress - 2) + '%';
+    //             if (percentText) percentText.innerText = progress + '%';
+                
+    //             setTimeout(startLoading, 50); 
+    //         } else {
+    //             if (percentText) {
+    //                 percentText.innerHTML = "78% <span class='animate-pulse'>[IN_PROGRESS]</span>";
+    //             }
+    //         }
+    //     }
+        
+    //     // Check karein ki elements exist karte hain ya nahi
+    //     if (careerProgressBar && careerRobot) {
+    //         startLoading();
+    //     }
+    // })();
 
         (function() {
             const careerProgressBar = document.getElementById('progress-bar');
