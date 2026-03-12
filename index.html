@@ -37,7 +37,7 @@
             --primary: #059669; 
             --bg: #f9fafb; 
             --text: #111827; 
-            --glow-opacity: 0.10; /* Light mode mein glow kam rakhein */
+            --glow-opacity: 0.05; /* Light mode mein glow kam kar di */
         }
 
 
@@ -137,19 +137,37 @@
             position: relative; 
             overflow-x: hidden; /* Mobile browser double protection */
             /* transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); */
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
             animation: fadeIn 1.5s ease-in;
         }
 
+        /* 2. Saari complex background images is naye class mein daal dein */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 5% 0%, rgba(16, 185, 129, var(--bg-opacity)) 0px, transparent 30%),
+                radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+            transition: all 0.4s ease;
+        }
+
         /* Gradients ko is separate layer par le jayein */
-        .theme-bg-layer {
+        /* .theme-bg-layer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2; /* Saare content ke piche */
-            pointer-events: none;
+            /* pointer-events: none;
             background-image: 
                 radial-gradient(circle at 5% 0%, rgba(16, 185, 129, 0.40) 0px, transparent 30%),
                 radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
@@ -157,7 +175,7 @@
                 linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
             transition: opacity 0.5s ease;
-        }
+        } */ */
 
         /* Light mode mein background image ki opacity kam kar dein agar wo light par achhi nahi lag rahi */
         .light-mode .theme-bg-layer {
@@ -318,21 +336,21 @@
         // function toggleTheme() { document.body.classList.toggle('light-mode'); }
 
         function toggleTheme() {
-            // 1. Class toggle karein
-            document.body.classList.toggle('light-mode');
+            const body = document.body;
+            body.classList.toggle('light-mode');
 
-            // 2. Browser ko force repaint trigger karne ke liye
-            // Hum body ki opacity ko 0.99 karke wapas 1 kar denge (jo user ko dikhega nahi par browser refresh ho jayega)
-            document.body.style.opacity = '0.99';
+            // 1. Force Reflow: Ye browser ko recalculate karne pe majboor karta hai
+            const offset = body.offsetHeight; 
             
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-                // Ek aur "safe" refresh trick:
-                window.scrollBy(0, 1);
-                window.scrollBy(0, -1);
-            }, 10);
-        }
+            // 2. Mobile Repaint Fix: Scroll position ko 1px hila kar wapas lana
+            window.scrollBy(0, 1);
+            window.scrollBy(0, -1);
 
+            // 3. (Optional) Agar ab bhi na ho, toh inline style toggle
+            body.style.display = 'none';
+            body.offsetHeight; // ye line browser ko "wake up" bolti hai
+            body.style.display = 'block';
+        }
 
 
         const textElement = document.getElementById('typewriter');
