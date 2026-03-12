@@ -112,6 +112,10 @@
             overflow-x: hidden !important;
         }
 
+        .bar-bg {
+            overflow: visible !important; /* Taaki robot upar dikhta rahe */
+        }
+
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -213,7 +217,8 @@
             </div>
             <div class="bar-bg w-full h-2 bg-emerald-900/20 rounded-full relative">
                 <div id="progress-bar" class="h-full bg-emerald-500 rounded-full" style="width: 0%"></div>
-                <div id="robot" class="absolute top-[-15px] text-lg transition-all duration-300" style="left: 0%">🤖</div>
+                <!-- <div id="robot" class="absolute top-[-15px] text-lg transition-all duration-300" style="left: 0%">🤖</div> -->
+                <div id="robot" class="absolute top-[-20px] text-lg leading-none" style="left: 0%; transform: translateX(-50%);">🤖</div>
             </div>
         </div><br></br>
 
@@ -413,35 +418,66 @@
         }
         createParticles();
 
-            (function() {
-        // 1. Unique names ka use karein taaki clash na ho
-        const careerProgressBar = document.getElementById('progress-bar');
-        const careerRobot = document.getElementById('robot');
-        const percentText = document.getElementById('percent');
+    //         (function() {
+    //     // 1. Unique names ka use karein taaki clash na ho
+    //     const careerProgressBar = document.getElementById('progress-bar');
+    //     const careerRobot = document.getElementById('robot');
+    //     const percentText = document.getElementById('percent');
         
-        let progress = 0;
-        const target = 78; 
+    //     let progress = 0;
+    //     const target = 78; 
 
-        function startLoading() {
-            if (progress < target) {
-                progress++;
-                if (careerProgressBar) careerProgressBar.style.width = progress + '%';
-                if (careerRobot) careerRobot.style.left = (progress - 2) + '%';
-                if (percentText) percentText.innerText = progress + '%';
+    //     function startLoading() {
+    //         if (progress < target) {
+    //             progress++;
+    //             if (careerProgressBar) careerProgressBar.style.width = progress + '%';
+    //             if (careerRobot) careerRobot.style.left = (progress - 2) + '%';
+    //             if (percentText) percentText.innerText = progress + '%';
                 
-                setTimeout(startLoading, 50); 
-            } else {
-                if (percentText) {
-                    percentText.innerHTML = "78% <span class='animate-pulse'>[IN_PROGRESS]</span>";
+    //             setTimeout(startLoading, 50); 
+    //         } else {
+    //             if (percentText) {
+    //                 percentText.innerHTML = "78% <span class='animate-pulse'>[IN_PROGRESS]</span>";
+    //             }
+    //         }
+    //     }
+        
+    //     // Check karein ki elements exist karte hain ya nahi
+    //     if (careerProgressBar && careerRobot) {
+    //         startLoading();
+    //     }
+    // })();
+
+        (function() {
+            const careerProgressBar = document.getElementById('progress-bar');
+            const careerRobot = document.getElementById('robot');
+            const percentText = document.getElementById('percent');
+            
+            let progress = 0;
+            const target = 78; 
+
+            function startLoading() {
+                if (progress < target) {
+                    progress++;
+                    // Bar update
+                    if (careerProgressBar) careerProgressBar.style.width = progress + '%';
+                    // Robot update (exact progress ke sath)
+                    if (careerRobot) careerRobot.style.left = progress + '%';
+                    if (percentText) percentText.innerText = progress + '%';
+                    
+                    setTimeout(startLoading, 40); 
+                } else {
+                    if (percentText) {
+                        percentText.innerHTML = "78% <span class='animate-pulse'>[IN_PROGRESS]</span>";
+                    }
                 }
             }
-        }
+            
+            if (careerProgressBar && careerRobot) {
+                startLoading();
+            }
+        })();
         
-        // Check karein ki elements exist karte hain ya nahi
-        if (careerProgressBar && careerRobot) {
-            startLoading();
-        }
-    })();
     </script>
 </body>
 </html>
