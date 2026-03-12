@@ -85,12 +85,10 @@
 
         /* Floating Particles */
         @keyframes float {
-            0% { transform: translateY(0); opacity: 0; }
-            10% { opacity: 0.3; }  /* Jaldi dikhna shuru hoga */
-            90% { opacity: 0.3; }  /* Screen ke top tak dikhta rahega */
-            100% { transform: translateY(-110vh); opacity: 0; } /* Smoothly gayab hoga */
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(0); opacity: 0; }
         }
-
 
         .particle {
             position: fixed; /* fixed se absolute change kiya */
@@ -99,7 +97,7 @@
             font-size: 10px;
             pointer-events: none;
             z-index: -1; /* Background layer pe rakha */
-            animation: float 1s linear infinite;
+            animation: float 10s linear infinite;
             opacity: 0;
         }
 
@@ -139,6 +137,7 @@
             width: 100%; /* Important */
             position: relative; 
             overflow-x: hidden; /* Mobile browser double protection */
+            /* transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); */
             transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
             animation: fadeIn 0.7s ease-in;
         }
@@ -218,6 +217,8 @@
             </div>
             <div class="bar-bg w-full h-2 bg-emerald-900/20 rounded-full relative">
                 <div id="progress-bar" class="h-full bg-emerald-500 rounded-full" style="width: 0%"></div>
+                <!-- <div id="robot" class="absolute top-[-15px] text-lg transition-all duration-300" style="left: 0%">🤖</div> -->
+                <!-- top value ko -22px ya -24px set karein -->
                 <div id="robot" class="absolute top-[-10px] text-lg leading-none" style="left: 0%; transform: translateX(-50%);">🤖</div>
             </div>
         </div><br></br>
@@ -412,13 +413,42 @@
                 span.style.left = Math.random() * 90 + 'vw';
                 span.style.top = Math.random() * 100 + 'vh'; // Random start height
                 span.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                span.style.animationDelay = (Math.random() * 5) + 's';
+                span.style.animationDelay = (Math.random() * 10) + 's';
                 
                 container.appendChild(span);
             }
         }
-        setTimeout(createParticles, 1000);
+        createParticles();
 
+    //         (function() {
+    //     // 1. Unique names ka use karein taaki clash na ho
+    //     const careerProgressBar = document.getElementById('progress-bar');
+    //     const careerRobot = document.getElementById('robot');
+    //     const percentText = document.getElementById('percent');
+        
+    //     let progress = 0;
+    //     const target = 78; 
+
+    //     function startLoading() {
+    //         if (progress < target) {
+    //             progress++;
+    //             if (careerProgressBar) careerProgressBar.style.width = progress + '%';
+    //             if (careerRobot) careerRobot.style.left = (progress - 2) + '%';
+    //             if (percentText) percentText.innerText = progress + '%';
+                
+    //             setTimeout(startLoading, 50); 
+    //         } else {
+    //             if (percentText) {
+    //                 percentText.innerHTML = "78% <span class='animate-pulse'>[IN_PROGRESS]</span>";
+    //             }
+    //         }
+    //     }
+        
+    //     // Check karein ki elements exist karte hain ya nahi
+    //     if (careerProgressBar && careerRobot) {
+    //         startLoading();
+    //     }
+    // })();
 
         (function() {
             const careerProgressBar = document.getElementById('progress-bar');
