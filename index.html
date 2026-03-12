@@ -80,35 +80,42 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* .theme-toggle { cursor: pointer; transition: 0.3s transform; } */
-        .typing::after { content: '|'; animation: blink 0.7s infinite; }
-
-        /* Default border style */
+        /* 1. Default State: Faint border (20% opacity) */
         .theme-toggle {
             cursor: pointer;
-            border: 1px solid rgba(16, 185, 129, 0.2); /* Faint green */
+            border: 1px solid rgba(16, 185, 129, 0.2) !important;
+            background: transparent !important;
             transition: all 0.2s ease;
-            -webkit-tap-highlight-color: transparent; /* Mobile blue selection hatane ke liye */
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent; /* Mobile blue box fix */
+            user-select: none; /* Text selection fix */
+            -webkit-user-select: none;
+            touch-action: manipulation; /* Double-tap zoom delay fix */
         }
 
-        /* Jab finger press ho (Click duration) */
+        /* 2. Press (Active) State: Sirf finger touch ke waqt green border aur background */
         .theme-toggle:active {
-            border-color: #10b981 !important; /* Bright Green border on press */
-            background: rgba(16, 185, 129, 0.1);
-            transform: scale(0.95); /* Chota sa press effect */
+            border-color: #10b981 !important;
+            background: rgba(16, 185, 129, 0.1) !important;
+            transform: scale(0.95); /* Click feedback */
         }
 
-        /* Mobile par persistent green border hatane ke liye focus ko reset karein */
-        .theme-toggle:focus {
-            outline: none;
-            border-color: rgba(16, 185, 129, 0.2); 
-        }
-
-        /* Hover sirf Desktop (Mouse) ke liye rakhein taaki mobile par "stuck" na ho */
-        @media (padding: 1024px) {
+        /* 3. Desktop Hover: Sirf mouse wale devices par green border (Mobile par nahi chipkega) */
+        @media (hover: hover) {
             .theme-toggle:hover {
-                border-color: #10b981;
+                border-color: #10b981 !important;
+                background: rgba(16, 185, 129, 0.05) !important;
             }
+        }
+
+        /* 4. Sticky Fix: Click release hote hi border aur background ko wapas normal karein */
+        .theme-toggle:focus, 
+        .theme-toggle:focus-visible, 
+        .theme-toggle:focus-within {
+            outline: none !important;
+            border-color: rgba(16, 185, 129, 0.2) !important;
+            background: transparent !important;
+            box-shadow: none !important;
         }
 
 
@@ -228,10 +235,15 @@
                 <a href="#stack" class="hover:text-emerald-500 transition">Stack</a>
                 <a href="mailto:faiyazkhan.work@gmail.com" class="hover:text-emerald-500 transition">Contact</a>
             </div>
-            <div onclick="toggleTheme()" class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 hover:bg-emerald-500/10 transition-all cursor-pointer">
-                <span class="text-[9px] uppercase font-bold tracking-widest opacity-60 leading-none">Theme</span>
-                <span class="text-lg leading-none">🌓</span>
+            <div onclick="toggleTheme(this)" 
+                class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 
+                        md:hover:border-emerald-500 md:hover:bg-emerald-500/10 
+                        active:bg-emerald-500/20 active:border-emerald-500
+                        transition-all cursor-pointer outline-none select-none">
+                <span class="text-[9px] uppercase font-bold tracking-widest opacity-60 leading-none pointer-events-none">Theme</span>
+                <span class="text-lg leading-none pointer-events-none">🌓</span>
             </div>
+
         </div>
     </div>
     </nav>
@@ -350,17 +362,23 @@
             const body = document.body;
             body.classList.toggle('light-mode');
 
-            // 1. Force Reflow: Ye browser ko recalculate karne pe majboor karta hai
+            // 1. Force Reflow
             const offset = body.offsetHeight; 
             
-            // 2. Mobile Repaint Fix: Scroll position ko 1px hila kar wapas lana
+            // 2. Mobile Repaint Fix
             window.scrollBy(0, 1);
             window.scrollBy(0, -1);
 
-            // 3. (Optional) Agar ab bhi na ho, toh inline style toggle
+            // 3. Inline style toggle (Wake up browser)
             body.style.display = 'none';
-            body.offsetHeight; // ye line browser ko "wake up" bolti hai
+            body.offsetHeight; 
             body.style.display = 'block';
+
+            // --- NEW: FIX FOR STICKY GREEN BORDER ---
+            // Ye line button se focus hata degi taaki border turant normal ho jaye
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
         }
 
 
@@ -447,35 +465,6 @@
         }
         createParticles();
 
-    //         (function() {
-    //     // 1. Unique names ka use karein taaki clash na ho
-    //     const careerProgressBar = document.getElementById('progress-bar');
-    //     const careerRobot = document.getElementById('robot');
-    //     const percentText = document.getElementById('percent');
-        
-    //     let progress = 0;
-    //     const target = 78; 
-
-    //     function startLoading() {
-    //         if (progress < target) {
-    //             progress++;
-    //             if (careerProgressBar) careerProgressBar.style.width = progress + '%';
-    //             if (careerRobot) careerRobot.style.left = (progress - 2) + '%';
-    //             if (percentText) percentText.innerText = progress + '%';
-                
-    //             setTimeout(startLoading, 50); 
-    //         } else {
-    //             if (percentText) {
-    //                 percentText.innerHTML = "78% <span class='animate-pulse'>[IN_PROGRESS]</span>";
-    //             }
-    //         }
-    //     }
-        
-    //     // Check karein ki elements exist karte hain ya nahi
-    //     if (careerProgressBar && careerRobot) {
-    //         startLoading();
-    //     }
-    // })();
 
         (function() {
             const careerProgressBar = document.getElementById('progress-bar');
