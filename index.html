@@ -80,31 +80,26 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* 1. Reset border to faint by default */
         .theme-toggle {
-            border-color: rgba(16, 185, 129, 0.2) !important;
-            background-color: transparent !important;
-            -webkit-tap-highlight-color: transparent;
+            /* Mobile blue/green highlight hatane ke liye */
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-touch-callout: none !important;
+            user-select: none !important;
+            outline: none !important;
         }
 
-        /* 2. Show green ONLY while the finger is pressing down */
-        .theme-toggle:active {
-            border-color: #10b981 !important;
-            background-color: rgba(16, 185, 129, 0.1) !important;
-        }
-
-        /* 3. Disable any "Focus" border that mobile browsers force */
+        /* Ye rule ensure karega ki click ke baad border wapas faint ho jaye */
         .theme-toggle:focus, .theme-toggle:focus-visible {
             border-color: rgba(16, 185, 129, 0.2) !important;
             background-color: transparent !important;
         }
 
-
-        /* Floating Particles */
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            50% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) translateX(0); opacity: 0; }
+        /* Sirf Desktop par hover dikhega */
+        @media (hover: hover) {
+            .theme-toggle:hover {
+                border-color: #10b981 !important;
+                background-color: rgba(16, 185, 129, 0.1) !important;
+            }
         }
 
         .particle {
@@ -216,12 +211,10 @@
                 <a href="#stack" class="hover:text-emerald-500 transition">Stack</a>
                 <a href="mailto:faiyazkhan.work@gmail.com" class="hover:text-emerald-500 transition">Contact</a>
             </div>
-            <!-- Change 'hover:' to 'md:hover:' -->
-            <div onclick="toggleTheme()" class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 md:hover:bg-emerald-500/10 transition-all cursor-pointer outline-none">
+            <div onclick="toggleTheme()" class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 active:bg-emerald-500/10 active:border-emerald-500 transition-all cursor-pointer outline-none select-none">
                 <span class="text-[9px] uppercase font-bold tracking-widest opacity-60 leading-none pointer-events-none">Theme</span>
                 <span class="text-lg leading-none pointer-events-none">🌓</span>
             </div>
-
         </div>
     </div>
     </nav>
@@ -337,26 +330,19 @@
 
 
         function toggleTheme() {
-            const body = document.body;
-            body.classList.toggle('light-mode');
-
-            // 1. Force Reflow
-            const offset = body.offsetHeight; 
+            document.body.classList.toggle('light-mode');
             
-            // 2. Mobile Repaint Fix
-            window.scrollBy(0, 1);
-            window.scrollBy(0, -1);
+            // Previous fixes (Repaint)
+            document.body.style.display = 'none';
+            document.body.offsetHeight;
+            document.body.style.display = 'block';
 
-            // 3. Inline style toggle (Wake up browser)
-            body.style.display = 'none';
-            body.offsetHeight; 
-            body.style.display = 'block';
-
-            // --- NEW: FIX FOR STICKY GREEN BORDER ---
-            // Ye line button se focus hata degi taaki border turant normal ho jaye
-            if (document.activeElement) {
-                document.activeElement.blur();
-            }
+            // Instant Focus Clear
+            setTimeout(() => {
+                if (document.activeElement) {
+                    document.activeElement.blur();
+                }
+            }, 50); // 50ms ka delay browser ko reset karne mein help karta hai
         }
 
 
