@@ -80,42 +80,23 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* 1. Default State: Faint border (20% opacity) */
+        /* 1. Reset border to faint by default */
         .theme-toggle {
-            cursor: pointer;
-            border: 1px solid rgba(16, 185, 129, 0.2) !important;
-            background: transparent !important;
-            transition: all 0.2s ease;
-            outline: none !important;
-            -webkit-tap-highlight-color: transparent; /* Mobile blue box fix */
-            user-select: none; /* Text selection fix */
-            -webkit-user-select: none;
-            touch-action: manipulation; /* Double-tap zoom delay fix */
+            border-color: rgba(16, 185, 129, 0.2) !important;
+            background-color: transparent !important;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* 2. Press (Active) State: Sirf finger touch ke waqt green border aur background */
+        /* 2. Show green ONLY while the finger is pressing down */
         .theme-toggle:active {
             border-color: #10b981 !important;
-            background: rgba(16, 185, 129, 0.1) !important;
-            transform: scale(0.95); /* Click feedback */
+            background-color: rgba(16, 185, 129, 0.1) !important;
         }
 
-        /* 3. Desktop Hover: Sirf mouse wale devices par green border (Mobile par nahi chipkega) */
-        @media (hover: hover) {
-            .theme-toggle:hover {
-                border-color: #10b981 !important;
-                background: rgba(16, 185, 129, 0.05) !important;
-            }
-        }
-
-        /* 4. Sticky Fix: Click release hote hi border aur background ko wapas normal karein */
-        .theme-toggle:focus, 
-        .theme-toggle:focus-visible, 
-        .theme-toggle:focus-within {
-            outline: none !important;
+        /* 3. Disable any "Focus" border that mobile browsers force */
+        .theme-toggle:focus, .theme-toggle:focus-visible {
             border-color: rgba(16, 185, 129, 0.2) !important;
-            background: transparent !important;
-            box-shadow: none !important;
+            background-color: transparent !important;
         }
 
 
@@ -235,11 +216,8 @@
                 <a href="#stack" class="hover:text-emerald-500 transition">Stack</a>
                 <a href="mailto:faiyazkhan.work@gmail.com" class="hover:text-emerald-500 transition">Contact</a>
             </div>
-            <div onclick="toggleTheme(this)" 
-                class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 
-                        md:hover:border-emerald-500 md:hover:bg-emerald-500/10 
-                        active:bg-emerald-500/20 active:border-emerald-500
-                        transition-all cursor-pointer outline-none select-none">
+            <!-- Change 'hover:' to 'md:hover:' -->
+            <div onclick="toggleTheme()" class="theme-toggle flex items-center gap-2 px-3 py-0.5 rounded-full border border-emerald-500/20 md:hover:bg-emerald-500/10 transition-all cursor-pointer outline-none">
                 <span class="text-[9px] uppercase font-bold tracking-widest opacity-60 leading-none pointer-events-none">Theme</span>
                 <span class="text-lg leading-none pointer-events-none">🌓</span>
             </div>
