@@ -143,54 +143,54 @@
         } */ */ */
 
 
+        :root { 
+            --primary: #10b981; 
+            --bg: #030712; 
+            --text: #f3f4f6; 
+            /* Dark mode gradients */
+            --grad-1: rgba(16, 185, 129, 0.25);
+            --grad-2: rgba(16, 185, 129, 0.03);
+        }
+
+        .light-mode { 
+            --primary: #059669; 
+            --bg: #f9fafb; 
+            --text: #111827; 
+            /* Light mode gradients */
+            --grad-1: rgba(5, 150, 105, 0.1);
+            --grad-2: rgba(0, 0, 0, 0.02);
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg); /* Ye turant change hoga transition ke saath */
+            background-color: var(--bg);
             color: var(--text);
             min-height: 100vh;
             width: 100%;
             margin: 0;
             padding: 0;
-            position: relative; 
             overflow-x: hidden;
-            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
-            animation: fadeIn 1.5s ease-in;
+            position: relative;
+            /* Transition ab background-color aur color dono pe kaam karega */
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Gradients ko background se hata kar yahan daal diya taaki theme change smooth ho */
+        /* Background patterns ko variables ke saath yahan rakhein */
         body::before {
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2; /* Content ke piche rahega */
-            pointer-events: none; /* Click/Scroll mein disturbance nahi karega */
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
             background-image: 
-                radial-gradient(circle at 5% 0%, rgba(16, 185, 129, 0.25) 0px, transparent 30%),
-                radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
-                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+                radial-gradient(circle at 5% 0%, var(--grad-1) 0px, transparent 30%),
+                radial-gradient(circle at 90% 70%, var(--grad-1) 0px, transparent 50%),
+                linear-gradient(to right, var(--grad-2) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grad-2) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+            transition: inherit; /* Ye variables ke change ko bhi smooth banayega */
         }
 
-        /* Light Mode Variables update karein */
-        .light-mode { 
-            --primary: #059669; 
-            --bg: #f9fafb; 
-            --text: #111827; 
-        }
-
-        /* Light mode mein background gradients ko reset ya halka karein */
-        .light-mode::before {
-            background-image: 
-                radial-gradient(circle at 5% 0%, rgba(5, 150, 105, 0.1) 0px, transparent 30%),
-                radial-gradient(circle at 90% 70%, rgba(5, 150, 105, 0.05) 0px, transparent 50%),
-                linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-            opacity: 0.8; /* Gradients ko thoda light rakhein */
-        }
 
 
 
