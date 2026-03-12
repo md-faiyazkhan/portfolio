@@ -119,7 +119,7 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
-            
+
             background-image: 
                 /* Yahan hardcoded rgba ki jagah variable use karein */
                 radial-gradient(circle at 5% 0%, rgba(16, 185, 129, var(--glow-opacity)) 0px, transparent 30%),
@@ -136,8 +136,32 @@
             width: 100%; /* Important */
             position: relative; 
             overflow-x: hidden; /* Mobile browser double protection */
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            /* transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); */
+            transition: background-color 0.3s ease;
             animation: fadeIn 1.5s ease-in;
+        }
+
+        /* Gradients ko is separate layer par le jayein */
+        .theme-bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* Saare content ke piche */
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 5% 0%, rgba(16, 185, 129, 0.40) 0px, transparent 30%),
+                radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Light mode mein background image ki opacity kam kar dein agar wo light par achhi nahi lag rahi */
+        .light-mode .theme-bg-layer {
+            opacity: 0.2; 
         }
 
         /* Scroll Progress Bar */
@@ -156,9 +180,9 @@
 </head>
 <body class="selection:bg-emerald-500/30">
 
-    <div class="grid-bg"></div>
+    <div class="theme-bg-layer"></div>
 
-    <!-- <div class="custom-cursor"></div> -->
+    <div class="grid-bg"></div>
 
     <div class="scroll-progress-bar"></div>
 
@@ -293,13 +317,22 @@
 
         // function toggleTheme() { document.body.classList.toggle('light-mode'); }
 
-        function toggleTheme() { 
+        function toggleTheme() {
+            // 1. Class toggle karein
             document.body.classList.toggle('light-mode');
+
+            // 2. Browser ko force repaint trigger karne ke liye
+            // Hum body ki opacity ko 0.99 karke wapas 1 kar denge (jo user ko dikhega nahi par browser refresh ho jayega)
+            document.body.style.opacity = '0.99';
             
-            // Mobile repaint fix: Ye line browser ko refresh trigger karne par majboor karti hai
-            window.scrollTo(window.scrollX, window.scrollY + 1);
-            window.scrollTo(window.scrollX, window.scrollY - 1);
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+                // Ek aur "safe" refresh trick:
+                window.scrollBy(0, 1);
+                window.scrollBy(0, -1);
+            }, 10);
         }
+
 
 
         const textElement = document.getElementById('typewriter');
