@@ -23,15 +23,23 @@
             overflow-x: hidden; /* Ye horizontal scroll ko block karega */
         }
 
-        :root { --primary: #10b981; --bg: #030712; --text: #f3f4f6; }
-        .light-mode { --primary: #059669; --bg: #f9fafb; --text: #111827; }
+        /* :root { --primary: #10b981; --bg: #030712; --text: #f3f4f6; }
+        .light-mode { --primary: #059669; --bg: #f9fafb; --text: #111827; } */
 
-        /* body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg); color: var(--text);
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeIn 1.5s ease-in;
-        } */
+        :root { 
+            --primary: #10b981; 
+            --bg: #030712; 
+            --text: #f3f4f6; 
+            --glow-opacity: 0.40; /* Dark mode glow */
+        }
+
+        .light-mode { 
+            --primary: #059669; 
+            --bg: #f9fafb; 
+            --text: #111827; 
+            --glow-opacity: 0.10; /* Light mode mein glow kam rakhein */
+        }
+
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -108,30 +116,20 @@
         }
 
 
-        /* body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 5% 0%, rgba(16, 185, 129, 0.40) 0px, transparent 30%),
-                radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
-                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
-            color: var(--text);
-            min-height: 100vh;
-            position: relative; 
-            overflow-x: hidden;
-        } */
-
-
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
+            
             background-image: 
-                radial-gradient(circle at 5% 0%, rgba(16, 185, 129, 0.40) 0px, transparent 30%),
+                /* Yahan hardcoded rgba ki jagah variable use karein */
+                radial-gradient(circle at 5% 0%, rgba(16, 185, 129, var(--glow-opacity)) 0px, transparent 30%),
                 radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
                 linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+            
+            /* Performance hint */
+            will-change: background-color;
+
             background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
             color: var(--text);
             min-height: 100vh;
@@ -293,7 +291,16 @@
         });
 
 
-        function toggleTheme() { document.body.classList.toggle('light-mode'); }
+        // function toggleTheme() { document.body.classList.toggle('light-mode'); }
+
+        function toggleTheme() { 
+            document.body.classList.toggle('light-mode');
+            
+            // Mobile repaint fix: Ye line browser ko refresh trigger karne par majboor karti hai
+            window.scrollTo(window.scrollX, window.scrollY + 1);
+            window.scrollTo(window.scrollX, window.scrollY - 1);
+        }
+
 
         const textElement = document.getElementById('typewriter');
         const phrases = ['LEARNING PATTERNS.', 'AUTONOMOUS AGENTS.', 'FUTURE OF AI.', 'NEXT-GEN MODELS.'];  
