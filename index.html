@@ -97,6 +97,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:
 .hero-name{font-size:clamp(2.6rem,6vw,5rem);font-weight:700;line-height:1.05;letter-spacing:-0.03em;margin-bottom:0.5rem;opacity:0;animation:fadeUp 0.7s 0.25s forwards}
 .hero-name .n1{color:var(--text);display:block}
 .hero-name .n2{display:block;background:linear-gradient(90deg,var(--cyan),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-greeting{font-family:var(--mono);font-size:clamp(0.8rem,1.5vw,0.95rem);color:var(--muted);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.4rem;opacity:0;animation:fadeUp 0.7s 0.18s forwards}
 .hero-role{font-size:clamp(0.85rem,1.8vw,1rem);font-weight:400;color:var(--text2);letter-spacing:0.02em;margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.7s 0.4s forwards}
 .hero-bio{font-size:clamp(0.82rem,1.5vw,0.9rem);font-weight:300;color:var(--muted);line-height:1.9;max-width:480px;margin-bottom:2.25rem;opacity:0;animation:fadeUp 0.7s 0.55s forwards}
 .hero-bio strong{color:var(--text2);font-weight:500}
@@ -467,6 +468,7 @@ body.light .mob-theme-btn .icon-moon{display:none}
 <section id="hero">
   <div class="hero-left">
     <div class="hero-chip"><div class="hero-chip-dot"></div>Machine Learning Engineer &nbsp;·&nbsp; India</div>
+    <p class="hero-greeting">Hi, I'm</p>
     <h1 class="hero-name">
       <span class="n1">Md Faiyaz</span>
       <span class="n2">Khan</span>
