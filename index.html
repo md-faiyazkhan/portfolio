@@ -987,6 +987,23 @@ function closeMobile() {
   toggle.querySelectorAll('span').forEach(x => { x.style.transform = ''; x.style.opacity = ''; });
 }
 
+/* ── NAVBAR MENU BEHAVIOUR ── */
+const navToggle = document.getElementById('navToggle');
+const overlay = document.getElementById('overlay');
+const navMenu = document.querySelector('.your-menu-class'); // Apni menu list ki class yaha likhein
+
+navToggle.addEventListener('click', () => {
+    overlay.classList.toggle('active');
+    navMenu.classList.toggle('active'); // Menu ko open karne ke liye
+});
+
+// Agar bahar (dim area) click karein to bhi menu band ho jaye
+overlay.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    navMenu.classList.remove('active');
+});
+
+
 /* ── THEME TOGGLE ── */
 (function() {
   // Check saved preference or OS preference
