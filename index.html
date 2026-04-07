@@ -985,6 +985,7 @@ toggle.addEventListener('click', () => {
 function closeMobile() {
   menu.classList.remove('open');
   toggle.querySelectorAll('span').forEach(x => { x.style.transform = ''; x.style.opacity = ''; });
+  overlay.classList.remove('active');
 }
 
 /* ── NAVBAR MENU BEHAVIOUR ── */
@@ -999,8 +1000,7 @@ navToggle.addEventListener('click', () => {
 
 // Agar bahar (dim area) click karein to bhi menu band ho jaye
 overlay.addEventListener('click', () => {
-    overlay.classList.remove('active');
-    navMenu.classList.remove('active');
+    closeMobile();
 });
 
 
