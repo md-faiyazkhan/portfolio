@@ -58,7 +58,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:
 .mobile-menu a{color:var(--text2);text-decoration:none;font-size:1rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color var(--tr)}
 .mobile-menu a:hover{color:var(--cyan)}
 .mobile-menu.open{display:flex}
-/* .mob-resume{display:inline-flex;align-items:center;gap:0.5rem;padding:0.20rem 0.20rem;border:1px solid var(--border2);border-radius:3px;font-family:var(--mono);font-size:0.72rem;color:var(--cyan);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;width:fit-content} */
+
+/* NAVBAR TOGGLE FOCUS/BG BLUR */
+/* Overlay default state (hidden) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 50% dark color */
+    backdrop-filter: blur(3px);    /* Optional: Thoda blur effect */
+    z-index: 98;                   /* Menu se niche par content se upar */
+    display: none;                 /* Default me hidden */
+}
+
+/* Jab active class add hogi tab dikhega */
+.overlay.active {
+    display: block;
+}
+
+/* Ensure karein ki aapka menu ka z-index 99 ya overlay se zyada ho */
+.nav-menu { /* Aapki menu list ki class */
+    z-index: 99;
+}
 
 /* BUTTONS */
 .btn-primary{display:inline-flex;align-items:center;gap:0.45rem;padding:0.65rem 1.5rem;background:var(--cyan);color:#020c14;border:none;border-radius:3px;font-family:var(--sans);font-size:0.82rem;font-weight:600;text-decoration:none;letter-spacing:0.02em;white-space:nowrap;transition:background var(--tr),transform var(--tr),box-shadow var(--tr)}
@@ -400,6 +423,9 @@ body.light .mob-theme-btn .icon-moon{display:none}
 <body>
 <div id="scroll-progress"></div>
 <button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<!-- Ye background ko dim karega -->
+<div class="overlay" id="overlay"></div>
 
 <!-- NAV -->
 <nav>
