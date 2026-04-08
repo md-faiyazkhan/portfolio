@@ -411,9 +411,33 @@ body.light .mob-theme-btn .icon-moon{display:none}
   /* Respect OS default if no manual choice */
 }
 
+/* Torch Effect for Cursor Sirf Desktop/Laptop ke liye */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Isse aapke buttons/links par click karne mein koi problem nahi hogi */
+    z-index: -1; /* Content ke peeche rahega */
+    background: radial-gradient(
+      600px circle at var(--x, 0) var(--y, 0), 
+      rgba(33, 150, 243, 0.15), /* Aapka Blue shade (#2196F3) low opacity mein */
+      transparent 80%
+    );
+  }
+}
+/* Mobile aur Tablets par hide rahega */
+@media (max-width: 1024px) {
+  .cursor-glow { display: none; }
+}
+
+
 </style>
 </head>
 <body>
+<div class="cursor-glow"></div>
 <div id="scroll-progress"></div>
 <button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
 
@@ -957,6 +981,17 @@ body.light .mob-theme-btn .icon-moon{display:none}
   <div class="footer-r">Built with <span>Python</span> &amp; passion</div>
 </footer>
 <script>
+/* ── CURSOR TORCH EFFECT ── */
+const glow = document.querySelector('.cursor-glow');
+
+// Check if device is desktop before adding listener
+if (window.matchMedia("(hover: hover)").matches) {
+  window.addEventListener('mousemove', (e) => {
+    glow.style.setProperty('--x', e.clientX + 'px');
+    glow.style.setProperty('--y', e.clientY + 'px');
+  });
+}
+
 /* ── NAV TOGGLE ── */
 const toggle = document.getElementById('navToggle');
 const menu = document.getElementById('mobileMenu');
