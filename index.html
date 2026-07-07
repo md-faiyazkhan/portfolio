@@ -525,7 +525,7 @@ body:not(.light) .ts-icon-moon{stroke:var(--cyan)}
         </svg>
         Get in Touch
       </a>
-      <a href="assets/Md_Faiyaz_Khan_Resume.pdf" target="_blank" rel="noopener" class="btn-ghost" title="View Resume">
+      <a href="assets/Md_Faiyaz_Khan_Resume.pdf" target="_blank" rel="noopener" download class="btn-ghost" title="Download Resume">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
         </svg>
@@ -904,7 +904,7 @@ body:not(.light) .ts-icon-moon{stroke:var(--cyan)}
           <div class="tool-chip">
             <div class="tool-icon">
               <img 
-                src="https://colab.research.google.com/img/colab_favicon_256px.png" 
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecolab/googlecolab-original.svg" 
                 alt="Google Colab"
                 style="width: 30px; height: 30px; object-fit: contain;"
               />
@@ -1036,7 +1036,7 @@ body:not(.light) .ts-icon-moon{stroke:var(--cyan)}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 4l10 9 10-9"/></svg>
             Send an Email
           </a>
-          <a href="assets/Md_Faiyaz_Khan_Resume.pdf" target="_blank" rel="noopener" class="btn-ghost" title="Download Resume">
+          <a href="assets/Md_Faiyaz_Khan_Resume.pdf" target="_blank" rel="noopener" download class="btn-ghost" title="Download Resume">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
             </svg>
@@ -1102,8 +1102,10 @@ if (window.matchMedia("(hover: hover)").matches) {
 /* ── NAV TOGGLE ── */
 const toggle = document.getElementById('navToggle');
 const menu = document.getElementById('mobileMenu');
+const overlay = document.getElementById('overlay');
 toggle.addEventListener('click', () => {
   menu.classList.toggle('open');
+  overlay.classList.toggle('active'); 
   const s = toggle.querySelectorAll('span');
   if (menu.classList.contains('open')) {
     s[0].style.transform = 'translateY(7px) rotate(45deg)';
@@ -1145,21 +1147,6 @@ window.addEventListener('load', () => {
   if (window.location.hash) {
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }
-});
-
-/* ── NAVBAR MENU BEHAVIOUR ── */
-const navToggle = document.getElementById('navToggle');
-const overlay = document.getElementById('overlay');
-const navMenu = document.querySelector('.your-menu-class'); // Apni menu list ki class yaha likhein
-
-navToggle.addEventListener('click', () => {
-    overlay.classList.toggle('active');
-    navMenu.classList.toggle('active'); // Menu ko open karne ke liye
-});
-
-// Agar bahar (dim area) click karein to bhi menu band ho jaye
-overlay.addEventListener('click', () => {
-    closeMobile();
 });
 
 
