@@ -28,7 +28,7 @@ html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden;min-height:100vh}
 body::after{content:'';position:fixed;inset:0;background-image:radial-gradient(rgba(0,200,255,0.09) 1px,transparent 1px);background-size:30px 30px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse 100% 100% at 50% 0%,black 20%,transparent 80%)}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,200,255,0.004) 2px,rgba(0,200,255,0.004) 4px);pointer-events:none;z-index:0}
-section,nav,footer,.marquee-wrap{position:relative;z-index:1}
+section,nav,footer{position:relative;z-index:1}
 
 /* TYPOGRAPHY */
 .eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--mono);font-size:0.68rem;color:var(--cyan);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.75rem}
@@ -51,9 +51,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:
 @keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,0.6)}50%{opacity:0.5;box-shadow:0 0 0 4px rgba(16,185,129,0)}}
 .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
 .nav-toggle span{display:block;width:22px;height:2px;background:var(--text2);border-radius:2px;transition:transform var(--tr),opacity var(--tr)}
-.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(2,12,20,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1.5rem var(--pad-x);flex-direction:column;gap:1.25rem;z-index:499}
+/* .mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(2,12,20,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1.5rem var(--pad-x);flex-direction:column;gap:1.25rem;z-index:499}
 .mobile-menu a{color:var(--text2);text-decoration:none;font-size:1rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color var(--tr)}
 .mobile-menu a:hover{color:var(--cyan)}
+.mobile-menu.open{display:flex} */
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(2,12,20,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0.25rem var(--pad-x) 1.5rem;flex-direction:column;gap:0;z-index:499}
+.mobile-menu a{display:block;padding:1rem 0.25rem;border-bottom:1px solid var(--border);color:var(--text2);text-decoration:none;font-size:1rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color var(--tr),background var(--tr)}
+.mobile-menu a:hover,.mobile-menu a:active{color:var(--cyan);background:rgba(0,200,255,0.04)}
 .mobile-menu.open{display:flex}
 
 /* NAVBAR TOGGLE FOCUS/BG BLUR */
@@ -117,11 +121,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:
 .ts-l{font-size:0.58rem;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.18rem;font-family:var(--sans)}
 
 /* MARQUEE */
-.marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0.85rem 0;overflow:hidden;background:var(--bg2)}
+/* .marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0.85rem 0;overflow:hidden;background:var(--bg2)}
 .marquee-track{display:flex;gap:2.5rem;width:max-content;animation:mscroll 30s linear infinite}
 .m-item{font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:1.5rem;flex-shrink:0}
 .m-item::after{content:'//';color:var(--border3);font-size:0.55rem}
-@keyframes mscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}} */
 
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:clamp(1.25rem,3vw,2rem);align-items:start}
@@ -222,7 +226,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:
 .rm-tag.t-o{background:var(--cdim);border:1px solid var(--border2);color:var(--cyan)}
 .rm-tag.t-n{background:var(--adim);border:1px solid rgba(245,158,11,0.18);color:var(--amber)}
 
-/* WHY ME */
+/* WHY ME
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
 .why-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.65rem;transition:border-color var(--tr),transform var(--tr)}
 .why-card:hover{border-color:var(--border2);transform:translateY(-3px)}
@@ -234,7 +238,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:
 .quote-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(1.5rem,3vw,2rem) clamp(1.5rem,4vw,2.5rem);margin-top:1.25rem;border-left:3px solid var(--cyan);display:flex;align-items:flex-start;gap:1.25rem}
 .q-mark{font-size:2.8rem;color:var(--cyan);line-height:0.8;font-family:Georgia,serif;opacity:0.35;flex-shrink:0;padding-top:0.5rem}
 .q-text{font-size:clamp(0.88rem,1.8vw,0.97rem);font-style:italic;color:var(--text2);line-height:1.75;font-weight:300}
-.q-text em{color:var(--cyan);font-style:normal;font-weight:500}
+.q-text em{color:var(--cyan);font-style:normal;font-weight:500} */
 
 /* CONTACT */
 .contact-outer{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative}
@@ -292,6 +296,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem var(--pad-x);display:fl
   .roadmap-grid::before{display:none}
   .nav-links{display:none}
   .nav-status{display:none}
+  .theme-btn{display:none !important}
   .nav-toggle{display:flex}
 }
 
@@ -331,7 +336,7 @@ body.light{background:var(--bg);color:var(--text)}
 body.light::after{background-image:radial-gradient(rgba(0,100,160,0.07) 1px,transparent 1px)}
 body.light::before{background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,100,160,0.003) 2px,rgba(0,100,160,0.003) 4px)}
 body.light nav{background:rgba(240,244,248,0.96)}
-body.light .marquee-wrap{background:var(--bg3)}
+/* body.light .marquee-wrap{background:var(--bg3)} */
 body.light .mobile-menu{background:rgba(240,244,248,0.99)}
 body.light .terminal-card{box-shadow:0 0 60px rgba(0,120,184,0.08)}
 body.light .hero-name .n2{background:linear-gradient(90deg,var(--cyan),var(--teal));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -364,7 +369,7 @@ body.light .theme-btn .icon-moon{display:none}
 body.light #scroll-progress{box-shadow:0 0 6px rgba(0,120,184,0.4)}
 
 /* BACK TO TOP BUTTON */
-#back-top{
+/* #back-top{
   position:fixed;bottom:1.75rem;right:1.75rem;
   width:42px;height:42px;border-radius:10px;
   background:var(--bg2);border:1px solid var(--border2);
@@ -376,7 +381,7 @@ body.light #scroll-progress{box-shadow:0 0 6px rgba(0,120,184,0.4)}
 }
 #back-top.visible{opacity:1;pointer-events:auto}
 #back-top:hover{border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,200,255,0.15)}
-#back-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#back-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round} */
 
 /* RESUME BUTTON IN HERO
 .btn-resume{
@@ -391,9 +396,10 @@ body.light #scroll-progress{box-shadow:0 0 6px rgba(0,120,184,0.4)}
 .btn-resume svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round} */
 
 /* MOBILE THEME TOGGLE ROW */
-.mob-theme-row{display:flex;align-items:center;justify-content:space-between;padding:0.25rem 0}
+.mob-theme-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 0.25rem;margin-top:0.5rem}
+/* .mob-theme-row{display:flex;align-items:center;justify-content:space-between;padding:0.25rem 0} */
 .mob-theme-label{color:var(--text2);font-size:1rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase}
-.mob-theme-btn{
+/* .mob-theme-btn{
   display:inline-flex;align-items:center;justify-content:center;
   width:38px;height:38px;border-radius:8px;
   border:1px solid var(--border2);background:transparent;
@@ -404,7 +410,15 @@ body.light #scroll-progress{box-shadow:0 0 6px rgba(0,120,184,0.4)}
 .mob-theme-btn .icon-sun{display:none}
 .mob-theme-btn .icon-moon{display:block}
 body.light .mob-theme-btn .icon-sun{display:block}
-body.light .mob-theme-btn .icon-moon{display:none}
+body.light .mob-theme-btn .icon-moon{display:none} */
+.theme-switch{background:none;border:none;padding:0;cursor:pointer;flex-shrink:0}
+.theme-switch-track{position:relative;display:flex;align-items:center;justify-content:space-between;width:52px;height:28px;border-radius:999px;background:var(--bg3);border:1px solid var(--border2);transition:background var(--tr),border-color var(--tr);padding:0 7px}
+.theme-switch-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--cyan);box-shadow:0 2px 6px rgba(0,0,0,0.35);transition:transform 0.25s cubic-bezier(.4,0,.2,1)}
+.ts-icon{position:relative;width:13px;height:13px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;z-index:1;pointer-events:none;transition:stroke var(--tr)}
+body.light .theme-switch-track{background:var(--cdim);border-color:var(--border3)}
+body.light .theme-switch-thumb{transform:translateX(24px)}
+body.light .ts-icon-sun{stroke:var(--amber)}
+body:not(.light) .ts-icon-moon{stroke:var(--cyan)}
 
 /* RESPONSIVE FIXES FOR LIGHT MODE */
 @media(prefers-color-scheme:light){
@@ -439,7 +453,7 @@ body.light .mob-theme-btn .icon-moon{display:none}
 <body>
 <div class="cursor-glow"></div>
 <div id="scroll-progress"></div>
-<button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+<!-- <button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button> -->
 
 <!-- Ye background ko dim karega -->
 <div class="overlay" id="overlay"></div>
@@ -448,6 +462,7 @@ body.light .mob-theme-btn .icon-moon{display:none}
 <nav>
   <a href="/" class="nav-logo"><b>FaiyazKhan</b><span class="text-emerald-500 italic">.in</span></a>
   <ul class="nav-links">
+    <li><a href="#hero">Home</a></li> 
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -466,16 +481,24 @@ body.light .mob-theme-btn .icon-moon{display:none}
   </button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
+  <a href="#hero"     onclick="closeMobile()">Home</a>
   <a href="#about"    onclick="closeMobile()">About</a>
   <a href="#skills"   onclick="closeMobile()">Skills</a>
   <a href="#projects" onclick="closeMobile()">Projects</a>
   <a href="#roadmap"  onclick="closeMobile()">Roadmap</a>
   <a href="#contact"  onclick="closeMobile()">Contact</a>
   <div class="mob-theme-row">
-    <span class="mob-theme-label">Theme &rarr;</span>
-    <button class="mob-theme-btn" id="mobThemeBtn" aria-label="Toggle theme">
+    <span class="mob-theme-label">Appearance</span>
+    <!-- <button class="mob-theme-btn" id="mobThemeBtn" aria-label="Toggle theme">
       <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button> -->
+    <button class="theme-switch" id="mobThemeBtn" role="switch" aria-checked="false" aria-label="Toggle theme">
+      <span class="theme-switch-track">
+        <svg class="ts-icon ts-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="ts-icon ts-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="theme-switch-thumb"></span>
+      </span>
     </button>
   </div>
 </div>
@@ -490,14 +513,19 @@ body.light .mob-theme-btn .icon-moon{display:none}
       <span class="n2">Khan</span>
     </h1>
     <p class="hero-role">Building Intelligent Systems &nbsp;·&nbsp; Python &nbsp;·&nbsp; ML Pipelines &nbsp;·&nbsp; AI</p>
-    <p class="hero-bio">From <strong>non-tech roots to AI engineering</strong> — driven by curiosity and a hunger to build. 2+ years of consistent self-learning. Certified by <strong>IIT Patna</strong> in AI &amp; Machine Learning.</p>
+    <p class="hero-bio">From <strong>non-tech roots to AI engineering</strong> — driven by curiosity and a hunger to build. Completed a Minor Program in Generative AI &amp; Machine Learning with <strong>Intellipaat, in collaboration with IIT Patna</strong>.</p>
     <div class="hero-cta">
       <a href="#projects" class="btn-primary">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         View Projects
       </a>
-      <a href="#contact" class="btn-ghost">Get in Touch &rarr;</a>
-      <a href="#" class="btn-ghost" title="Download Resume" onclick="alert('Coming Soon! The updated resume will be available shortly.');return false;">
+      <a href="#contact" class="btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/>
+        </svg>
+        Get in Touch
+      </a>
+      <a href="assets/Md_Faiyaz_Khan_Resume.pdf" target="_blank" rel="noopener" download class="btn-ghost" title="Download Resume">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
         </svg>
@@ -513,7 +541,7 @@ body.light .mob-theme-btn .icon-moon{display:none}
         <div class="tl" style="margin-top:0.35rem"><span class="tp">»</span><span class="tc">engineer = {</span></div>
         <div class="tl"><span class="tind"><span class="tkey">"name"</span>: <span class="tval">"Md Faiyaz Khan"</span>,</span></div>
         <div class="tl"><span class="tind"><span class="tkey">"role"</span>: <span class="tval">"ML Engineer"</span>,</span></div>
-        <div class="tl"><span class="tind"><span class="tkey">"cert"</span>: <span class="tval">"IIT Patna"</span>,</span></div>
+        <div class="tl"><span class="tind"><span class="tkey">"cert"</span>: <span class="tval">"Intellipaat x IIT Patna"</span>,</span></div>
         <div class="tl"><span class="tind"><span class="tkey">"stack"</span>: <span class="tval2">["Python","sklearn",</span></span></div>
         <div class="tl"><span class="tind" style="padding-left:3.6rem"><span class="tval2">"FastAPI","Docker"],</span></span></div>
         <div class="tl"><span class="tind"><span class="tkey">"status"</span>: <span class="tval">"open_to_work"</span>,</span></div>
@@ -522,8 +550,8 @@ body.light .mob-theme-btn .icon-moon{display:none}
         <div class="tl" style="margin-top:0.4rem"><span class="tp">»</span><span class="tc"> <span class="tcursor"></span></span></div>
         <div class="t-stats">
           <div class="ts"><div class="ts-n">2+</div><div class="ts-l">Yrs Coding</div></div>
-          <div class="ts"><div class="ts-n">3</div><div class="ts-l">Projects</div></div>
-          <div class="ts"><div class="ts-n">20+</div><div class="ts-l">Tools</div></div>
+          <div class="ts"><div class="ts-n">7</div><div class="ts-l">Projects</div></div>
+          <div class="ts"><div class="ts-n">18+</div><div class="ts-l">Tools</div></div>
           <div class="ts"><div class="ts-n">&#8734;</div><div class="ts-l">Learning</div></div>
         </div>
       </div>
@@ -532,50 +560,110 @@ body.light .mob-theme-btn .icon-moon{display:none}
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-wrap">
+<!-- <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="m-item">Python</span><span class="m-item">Scikit-Learn</span><span class="m-item">Machine Learning</span><span class="m-item">FastAPI</span><span class="m-item">Docker</span><span class="m-item">AWS</span><span class="m-item">PostgreSQL</span><span class="m-item">Pandas</span><span class="m-item">Streamlit</span><span class="m-item">CI/CD</span><span class="m-item">Optuna</span><span class="m-item">IIT Patna Certified</span><span
+    <span class="m-item">Python</span><span class="m-item">Scikit-Learn</span><span class="m-item">Machine Learning</span><span class="m-item">FastAPI</span><span class="m-item">Docker</span><span class="m-item">AWS</span><span class="m-item">PostgreSQL</span><span class="m-item">Pandas</span><span class="m-item">Streamlit</span><span class="m-item">CI/CD</span><span class="m-item">Optuna</span><span class="m-item">IIT Patna Collaboration</span><span
     class="m-item">Seaborn</span><span class="m-item">BeautifulSoup</span><span
     class="m-item">Git</span><span class="m-item">Github</span><span
     class="m-item">VS Code</span><span class="m-item">Jupyter</span><span
     class="m-item">Postman</span><span class="m-item">Anaconda</span><span
-    class="m-item">Deep Learning</span><span class="m-item">Generative AI</span><span
+    class="m-item">Machine Learning</span><span class="m-item">Generative AI</span><span
     class="m-item">Computer Vision</span><span class="m-item">NLP</span>
-    <span class="m-item">Python</span><span class="m-item">Scikit-Learn</span><span class="m-item">Machine Learning</span><span class="m-item">FastAPI</span><span class="m-item">Docker</span><span class="m-item">AWS</span><span class="m-item">PostgreSQL</span><span class="m-item">Pandas</span><span class="m-item">Streamlit</span><span class="m-item">CI/CD</span><span class="m-item">Optuna</span><span class="m-item">IIT Patna Certified</span>
+    <span class="m-item">Python</span><span class="m-item">Scikit-Learn</span><span class="m-item">Machine Learning</span><span class="m-item">FastAPI</span><span class="m-item">Docker</span><span class="m-item">AWS</span><span class="m-item">PostgreSQL</span><span class="m-item">Pandas</span><span class="m-item">Streamlit</span><span class="m-item">CI/CD</span><span class="m-item">Optuna</span><span class="m-item">IIT Patna Collaboration</span>
   </div>
-</div>
+</div> -->
 
 <!-- ABOUT -->
 <section id="about">
   <div class="sw">
-    <div class="section-head reveal"><div class="eyebrow">About Me</div><h2 class="section-title">From curiosity to <span>engineering</span></h2></div>
+    <div class="section-head reveal">
+      <div class="eyebrow">About Me</div>
+      <h2 class="section-title">From curiosity to <span>engineering</span></h2>
+    </div>
+
     <div class="about-grid">
+
       <div class="story-card reveal">
         <div class="story-text">
-          <p>I come from a <strong>non-technical background</strong> — no CS degree, no privileged head start. What I carried was an obsessive curiosity for how technology works, dating back to childhood.</p>
-          <p>Two years ago I opened a code editor for the first time. HTML → CSS → Python — each layer pulled me deeper. When I discovered that <strong>Python is the backbone of AI</strong>, the direction became clear. This was the field I wanted to master.</p>
-          <p>I enrolled in an AI &amp; ML program with <strong>Intellipaat in collaboration with IIT Patna</strong> — one of India's premier institutions — receiving an alumni certificate and an IIT Patna student ID. I'm currently mastering end-to-end ML pipelines: data preprocessing, feature engineering, model training, and deployment.</p>
-          <p>What sets me apart is simple: I don't experience this as work. I <strong>overwork because I want to</strong>. That kind of intrinsic motivation compounds in ways that external pressure never can.</p>
+
+          <p>
+            I come from a <strong>non-technical background</strong>, and my journey into machine learning began through
+            <strong>self-directed learning</strong> rather than a traditional CS degree. Starting with
+            <strong>HTML</strong>, <strong>CSS</strong>, and <strong>Python</strong>, I became fascinated by how intelligent
+            systems are built, which inspired me to pursue AI and Machine Learning full-time.
+          </p>
+
+          <p>
+            I completed a <strong>Minor Program in Generative AI and Machine Learning</strong> through
+            Intellipaat, delivered in collaboration with <strong>IIT Patna</strong>, where I gained hands-on
+            experience in machine learning fundamentals, data preprocessing, feature engineering,
+            model evaluation, explainable AI, and deployment workflows through structured coursework
+            and practical projects.
+          </p>
+
+          <p>
+            Since then, I've built <strong>multiple end-to-end machine learning projects</strong> covering
+            data auditing, leakage detection, explainable models, FastAPI-based APIs, Dockerized deployment,
+            and interactive dashboards. I'm currently looking for a
+            <strong>Machine Learning Internship</strong> where I can contribute to real-world products while
+            continuing to grow as an ML Engineer.
+          </p>
+
         </div>
       </div>
+
       <div class="about-right">
+
         <div class="info-card reveal">
           <div class="ic-lbl">Certification &amp; Education</div>
-          <div class="edu-name">AI &amp; Machine Learning Program</div>
-          <div class="edu-org">Intellipaat &times; IIT Patna</div>
-          <div class="edu-det">Alumni Certificate &nbsp;&middot;&nbsp; IIT Patna Student ID &nbsp;&middot;&nbsp; 2025–2026</div>
-          <div class="iit-badge">IIT Patna Certified</div>
+          <div class="edu-name">Minor Program in Generative AI &amp; Machine Learning</div>
+          <div class="edu-org">Intellipaat, in collaboration with IIT Patna</div>
+          <div class="edu-det">Coursework &amp; Hands-on Projects &nbsp;&middot;&nbsp; 2025–2026</div>
+          <div class="iit-badge">IIT Patna Collaboration</div>
         </div>
+
         <div class="info-card reveal">
           <div class="ic-lbl">Learning Timeline</div>
+
           <div class="timeline">
-            <div class="tl-item"><div class="tl-dot"><div class="tl-di"></div></div><div class="tl-b"><div class="tl-yr">2024</div><div class="tl-tx">Started HTML &amp; CSS — first steps into tech</div></div></div>
-            <div class="tl-item"><div class="tl-dot"><div class="tl-di"></div></div><div class="tl-b"><div class="tl-yr">2024</div><div class="tl-tx">Python mastery · discovered AI/ML potential</div></div></div>
-            <div class="tl-item"><div class="tl-dot"><div class="tl-di"></div></div><div class="tl-b"><div class="tl-yr">2025</div><div class="tl-tx">IIT Patna AI program · ML · DL · GenAI</div></div></div>
-            <div class="tl-item active"><div class="tl-dot"><div class="tl-di"></div></div><div class="tl-b"><div class="tl-yr">2026 →</div><div class="tl-tx">Building ML pipelines · Seeking first role · Open to work</div></div></div>
+
+            <div class="tl-item">
+              <div class="tl-dot"><div class="tl-di"></div></div>
+              <div class="tl-b">
+                <div class="tl-yr">2024</div>
+                <div class="tl-tx">Started learning HTML &amp; CSS through self-study</div>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"><div class="tl-di"></div></div>
+              <div class="tl-b">
+                <div class="tl-yr">2024</div>
+                <div class="tl-tx">Learned Python and discovered Machine Learning</div>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"><div class="tl-di"></div></div>
+              <div class="tl-b">
+                <div class="tl-yr">2025</div>
+                <div class="tl-tx">Completed Minor Program in Generative AI &amp; ML</div>
+              </div>
+            </div>
+
+            <div class="tl-item active">
+              <div class="tl-dot"><div class="tl-di"></div></div>
+              <div class="tl-b">
+                <div class="tl-yr">2026 →</div>
+                <div class="tl-tx">Building production-ready ML applications · Open to ML Internship opportunities</div>
+              </div>
+            </div>
+
           </div>
         </div>
+
       </div>
+
     </div>
   </div>
 </section>
@@ -625,9 +713,10 @@ body.light .mob-theme-btn .icon-moon{display:none}
           <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg"/></div><div class="tool-name">NumPy</div></div>
           <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"/></div><div class="tool-name">Pandas</div></div>
           <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg"/></div><div class="tool-name">Matplotlib</div></div>
-          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/plotly/plotly-original.svg"/></div><div class="tool-name">Seaborn</div></div>
+          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/gilbarbara/logos/logos/seaborn-icon.svg"/></div><div class="tool-name">Seaborn</div></div>
+
           <!-- BeautifulSoup — Simple Icons via unpkg -->
-          <div class="tool-chip">
+          <!-- <div class="tool-chip">
             <div class="tool-icon">
               <img src="https://unpkg.com/simple-icons@latest/icons/beautifulsoup.svg" id="bs-img" style="display:none"/>
               <svg id="bs-fallback" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
@@ -638,9 +727,9 @@ body.light .mob-theme-btn .icon-moon{display:none}
               </svg>
             </div>
             <div class="tool-name">BeautifulSoup</div>
-          </div>
+          </div> -->
           <!-- Optuna -->
-          <div class="tool-chip">
+          <!-- <div class="tool-chip">
             <div class="tool-icon">
               <svg viewBox="0 0 24 24" width="24" height="24">
                 <rect width="24" height="24" rx="4" fill="#130C35"/>
@@ -650,12 +739,12 @@ body.light .mob-theme-btn .icon-moon{display:none}
               </svg>
             </div>
             <div class="tool-name">Optuna</div>
-          </div>
+          </div> -->
         </div>
       </div>
 
       <!-- Backend & Deployment -->
-      <div class="skill-cat-block">
+      <!-- <div class="skill-cat-block">
         <div class="skill-cat-header">
           <div class="skill-cat-icon-wrap">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -663,6 +752,54 @@ body.light .mob-theme-btn .icon-moon{display:none}
           <div>
             <div class="skill-cat-name">Backend &amp; Deployment</div>
             <div class="skill-cat-desc">frameworks for serving ML models and building APIs</div>
+          </div>
+        </div>
+        <div class="tools-icon-grid">
+          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg"/></div><div class="tool-name">FastAPI</div></div> -->
+          <!-- Streamlit — official logo from Simple Icons -->
+          <!-- <div class="tool-chip">
+            <div class="tool-icon">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/streamlit.svg" id="st-img"
+                style="width:30px;height:30px;filter:invert(35%) sepia(90%) saturate(600%) hue-rotate(330deg);"
+                onerror="this.style.display='none';document.getElementById('st-fb').style.display='block'"/>
+              <svg id="st-fb" viewBox="0 0 24 24" width="24" height="24" style="display:none">
+                <rect width="24" height="24" rx="4" fill="#FF4B4B"/>
+                <text x="12" y="10" text-anchor="middle" fill="#fff" font-size="5" font-family="sans-serif" font-weight="700">Stream</text>
+                <text x="12" y="17" text-anchor="middle" fill="#fff" font-size="5" font-family="sans-serif" font-weight="700">lit</text>
+              </svg>
+            </div>
+            <div class="tool-name">Streamlit</div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Databases -->
+      <!-- <div class="skill-cat-block">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon-wrap">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div>
+            <div class="skill-cat-name">Databases</div>
+            <div class="skill-cat-desc">relational databases for storing and querying structured data</div>
+          </div>
+        </div>
+        <div class="tools-icon-grid">
+          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"/></div><div class="tool-name">MySQL</div></div>
+          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"/></div><div class="tool-name">PostgreSQL</div></div>
+          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"/></div><div class="tool-name">MS SQL Server</div></div>
+        </div>
+      </div> -->
+
+      <!-- Backend & Databases -->
+      <div class="skill-cat-block">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon-wrap">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <div class="skill-cat-name">Backend &amp; Databases</div>
+            <div class="skill-cat-desc">Frameworks and relational databases for building ML applications.</div>
           </div>
         </div>
         <div class="tools-icon-grid">
@@ -681,24 +818,9 @@ body.light .mob-theme-btn .icon-moon{display:none}
             </div>
             <div class="tool-name">Streamlit</div>
           </div>
-        </div>
-      </div>
-
-      <!-- Databases -->
-      <div class="skill-cat-block">
-        <div class="skill-cat-header">
-          <div class="skill-cat-icon-wrap">
-            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-          </div>
-          <div>
-            <div class="skill-cat-name">Databases</div>
-            <div class="skill-cat-desc">relational databases for storing and querying structured data</div>
-          </div>
-        </div>
-        <div class="tools-icon-grid">
-          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"/></div><div class="tool-name">MS SQL Server</div></div>
           <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"/></div><div class="tool-name">MySQL</div></div>
           <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"/></div><div class="tool-name">PostgreSQL</div></div>
+          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"/></div><div class="tool-name">MS SQL Server</div></div>
         </div>
       </div>
 
@@ -743,14 +865,14 @@ body.light .mob-theme-btn .icon-moon{display:none}
             </div>
             <div class="tool-name">CI/CD</div>
           </div>
-          <div class="tool-chip">
+          <!-- <div class="tool-chip">
             <div class="tool-icon">
               <svg viewBox="0 0 21 21" fill="currentColor">
                 <path d="M15.6491 0.00582604C12.9679 -0.120371 10.7133 1.81847 10.3286 4.373C10.3134 4.49154 10.2905 4.60627 10.2715 4.72099C9.67356 7.90268 6.88955 10.3119 3.5457 10.3119C2.35364 10.3119 1.23395 10.006 0.258977 9.47058C0.140914 9.40557 0 9.4897 0 9.62354V10.3081V20.6218H10.2677V12.8894C10.2677 11.4668 11.4178 10.3119 12.8346 10.3119H15.4015C18.3074 10.3119 20.6458 7.89121 20.5315 4.94662C20.4287 2.29649 18.2884 0.132023 15.6491 0.00582604Z"/>
               </svg>
             </div>
             <div class="tool-name">Render</div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -769,7 +891,7 @@ body.light .mob-theme-btn .icon-moon{display:none}
           <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"/></div><div class="tool-name">VS Code</div></div>
           <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg"/></div><div class="tool-name">PyCharm</div></div>
           <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg"/></div><div class="tool-name">Jupyter</div></div>
-          <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg"/></div><div class="tool-name">Anaconda</div></div>
+          <!-- <div class="tool-chip"><div class="tool-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg"/></div><div class="tool-name">Anaconda</div></div> -->
           <!-- Postman — correct Simple Icons path -->
           <div class="tool-chip">
             <div class="tool-icon">
@@ -804,12 +926,12 @@ body.light .mob-theme-btn .icon-moon{display:none}
       <div class="proj-featured reveal">
         <div>
           <div class="proj-num">01 — Featured Project</div>
-          <div class="proj-name" style="font-size:clamp(1.1rem,2.5vw,1.3rem);margin:0.5rem 0">Bank Management System</div>
-          <div class="proj-desc" style="margin-bottom:1.25rem">A console-based banking system built with Python and Object-Oriented Programming. Simulates real banking operations — account creation, deposits, withdrawals, balance checks, and file-based data persistence — in a clean, modular architecture. Demonstrates strong grasp of Encapsulation, Inheritance, Polymorphism, and Abstraction.</div>
-          <div class="proj-pills" style="margin-bottom:1.5rem"><span class="ppill">Python</span><span class="ppill">OOP</span><span class="ppill">File Handling</span><span class="ppill">CLI</span><span class="ppill">Modular Design</span></div>
+          <div class="proj-name" style="font-size:clamp(1.1rem,2.5vw,1.3rem);margin:0.5rem 0">UPI Fraud Detector</div>
+          <div class="proj-desc" style="margin-bottom:1.25rem">An end-to-end fraud detection and risk scoring system for UPI transactions. Uncovered and eliminated 34 data leakage features through a two-round investigation triggered by a suspiciously perfect ROC-AUC score. The final leakage-free Random Forest model achieved 0.997 ROC-AUC and 0.987 PR-AUC, with every prediction explained using SHAP.</div>
+          <div class="proj-pills" style="margin-bottom:1.5rem"><span class="ppill">Python</span><span class="ppill">Scikit-learn</span><span class="ppill">SHAP</span><span class="ppill">FastAPI</span><span class="ppill">Streamlit</span><span class="ppill">Docker</span><span class="ppill">GitHub Actions CI</span></div>
           <div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
             <div class="p-status"><div class="sd sd-done"></div><span class="sl-done">Completed</span></div>
-            <a href="https://github.com/md-faiyazkhan/bank-management-system" target="_blank" class="proj-gh"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>View on GitHub &rarr;</a>
+            <a href="https://github.com/md-faiyazkhan/upi-fraud-detector" target="_blank" class="proj-gh"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>View on GitHub &rarr;</a>
           </div>
         </div>
         <div class="proj-art-wrap"><div class="proj-art"><div class="ring-a"></div><div class="ring-b"></div><svg viewBox="0 0 80 80" fill="none"><rect x="14" y="22" width="52" height="7" rx="1.5" stroke="#00c8ff" stroke-width="1.2"/><rect x="14" y="34" width="52" height="7" rx="1.5" stroke="#00c8ff" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.6"/><rect x="14" y="46" width="52" height="7" rx="1.5" stroke="#00c8ff" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.4"/><circle cx="21" cy="25.5" r="1.8" fill="#10b981"/><circle cx="21" cy="37.5" r="1.8" fill="#00c8ff" opacity="0.7"/><circle cx="21" cy="49.5" r="1.8" fill="#00c8ff" opacity="0.5"/></svg></div></div>
@@ -817,22 +939,22 @@ body.light .mob-theme-btn .icon-moon{display:none}
       <div class="proj-row">
         <div class="proj-card reveal">
           <div class="proj-num">02</div>
-          <div class="proj-name">Online Food Ordering System</div>
-          <div class="proj-desc">A food delivery interface where users browse menus and place orders with ease. Designed for simplicity — minimal friction from landing page to checkout.</div>
-          <div class="proj-pills"><span class="ppill">Python</span><span class="ppill">Web UI</span><span class="ppill">UX Design</span></div>
+          <div class="proj-name">SureVisit</div>
+          <div class="proj-desc">A healthcare appointment no-show prediction system built with leakage-safe historical features using chronologically ordered expanding windows. Validated model behavior through targeted SHAP perturbation testing rather than relying on feature importance alone. The final Random Forest model achieved 0.74 cross-validated ROC-AUC with 0.80 recall for missed appointments.</div>
+          <div class="proj-pills"><span class="ppill">Python</span><span class="ppill">Scikit-learn</span><span class="ppill">SHAP</span><span class="ppill">FastAPI</span><span class="ppill">Streamlit</span><span class="ppill">Docker</span></div>
           <div class="proj-footer">
             <div class="p-status"><div class="sd sd-done"></div><span class="sl-done">Completed</span></div>
-            <a href="https://github.com/md-faiyazkhan" target="_blank" class="proj-gh"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub &rarr;</a>
+            <a href="https://github.com/md-faiyazkhan/surevisit" target="_blank" class="proj-gh"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub &rarr;</a>
           </div>
         </div>
         <div class="proj-card reveal">
           <div class="proj-num">03</div>
-          <div class="proj-name">Go Cab — Ride Booking Platform</div>
-          <div class="proj-desc">A web-based cab booking system for India. Clean, professional UI built for first-time users — effortless sign-up, login, and ride booking across India.</div>
-          <div class="proj-pills"><span class="ppill">HTML</span><span class="ppill">CSS</span><span class="ppill">JavaScript</span><span class="ppill">Python</span><span class="ppill">Java</span></div>
+          <div class="proj-name">Startup Risk Analyzer</div>
+          <div class="proj-desc">An end-to-end startup risk assessment system that predicts business success from financial and operational indicators. Engineered domain-specific business-health features and selected the final Logistic Regression model through rigorous cross-validation, achieving 0.839 ROC-AUC.</div>
+          <div class="proj-pills"><span class="ppill">Python</span><span class="ppill">Scikit-learn</span><span class="ppill">XGBoost</span><span class="ppill">FastAPI</span><span class="ppill">Streamlit</span><span class="ppill">Docker</span></div>
           <div class="proj-footer">
-            <div class="p-status"><div class="sd sd-wip"></div><span class="sl-wip">Incompleted</span></div>
-            <a href="https://github.com/md-faiyazkhan" target="_blank" class="proj-gh"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub &rarr;</a>
+            <div class="p-status"><div class="sd sd-done"></div><span class="sl-done">Completed</span></div>
+            <a href="https://github.com/md-faiyazkhan/startup-risk-analyzer" target="_blank" class="proj-gh"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub &rarr;</a>
           </div>
         </div>
       </div>
@@ -853,15 +975,14 @@ body.light .mob-theme-btn .icon-moon{display:none}
       <!-- CARD 1: Mastered -->
       <div class="rm-card mastered reveal">
         <div class="rm-badge-row">
-          <span class="rm-badge b-mastered">Mastered</span>
+          <span class="rm-badge b-mastered">Strong Foundation</span>
           <div class="rm-icon ic-m">📊</div>
         </div>
-        <div class="rm-title">Data Science Core</div>
+        <div class="rm-title">Machine Learning Foundation</div>
         <div class="rm-desc">EDA, feature engineering, model selection, and hyperparameter optimization using Optuna. Confident with full preprocessing pipelines end-to-end.</div>
         <div class="rm-tags">
           <span class="rm-tag t-m">Pandas</span>
           <span class="rm-tag t-m">Scikit-Learn</span>
-          <span class="rm-tag t-m">Optuna</span>
           <span class="rm-tag t-m">Feature Eng.</span>
         </div>
       </div>
@@ -875,10 +996,10 @@ body.light .mob-theme-btn .icon-moon{display:none}
         <div class="rm-title">Cloud &amp; MLOps</div>
         <div class="rm-desc">Production deployment with AWS, Docker, and CI/CD pipelines. Currently integrating FastAPI model serving with automated deployment workflows.</div>
         <div class="rm-tags">
-          <span class="rm-tag t-o">AWS</span>
+          <span class="rm-tag t-o">FastAPI</span>
           <span class="rm-tag t-o">Docker</span>
           <span class="rm-tag t-o">CI/CD</span>
-          <span class="rm-tag t-o">FastAPI</span>
+          <span class="rm-tag t-o">AWS</span>
         </div>
       </div>
 
@@ -889,7 +1010,7 @@ body.light .mob-theme-btn .icon-moon{display:none}
           <div class="rm-icon ic-n">🚀</div>
         </div>
         <div class="rm-title">Deep Learning &amp; LLMs</div>
-        <div class="rm-desc">Neural networks, transformer architectures, and large language model fine-tuning. The logical next frontier after mastering classical ML.</div>
+        <div class="rm-desc">Expanding into neural networks, transformer architectures, and large language models to develop the next generation of AI applications.</div>
         <div class="rm-tags">
           <span class="rm-tag t-n">Neural Nets</span>
           <span class="rm-tag t-n">Transformers</span>
@@ -897,37 +1018,6 @@ body.light .mob-theme-btn .icon-moon{display:none}
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- WHY ME -->
-<section id="philosophy">
-  <div class="sw">
-    <div class="section-head reveal"><div class="eyebrow">Why Me</div><h2 class="section-title">What makes me <span>different</span></h2></div>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="why-num">01</div>
-        <div class="why-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-        <div class="why-title">Self-Taught Foundation</div>
-        <div class="why-text">No shortcuts. No spoon-feeding. Every concept I know, I researched, broke, and rebuilt from scratch. That process builds a different kind of depth — the kind that holds under pressure.</div>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-num">02</div>
-        <div class="why-ico"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <div class="why-title">Passion Over Pressure</div>
-        <div class="why-text">I overwork because I genuinely want to — hours disappear without notice. That intrinsic drive compounds faster than any external motivation. I don't just show up; I go deep.</div>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-num">03</div>
-        <div class="why-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="why-title">Always Progressing</div>
-        <div class="why-text">Currently mastering end-to-end ML pipelines — from raw data preprocessing to deployed, production-ready models. Each concept is a deliberate building block, not a checkbox.</div>
-      </div>
-    </div>
-    <div class="quote-card reveal">
-      <div class="q-mark">"</div>
-      <div class="q-text">I never feel bored doing this work — and that's the most dangerous kind of person to compete with: someone who <em>genuinely loves</em> what they're building. A non-tech background taught me that nothing is given — everything is earned.</div>
     </div>
   </div>
 </section>
@@ -940,13 +1030,13 @@ body.light .mob-theme-btn .icon-moon{display:none}
       <div class="contact-banner">
         <div class="contact-avail-row"><div class="avail-blink"></div>Available for opportunities</div>
         <h3 class="contact-headline">Open to roles, internships<br>&amp; <span>collaboration</span></h3>
-        <p class="contact-subtext">I'm actively looking for Machine Learning engineering roles and internships. If you see a potential fit — reach out. I respond quickly and I'm always ready to talk about AI, Python, and what I'm building next.</p>
+        <p class="contact-subtext">I'm actively looking for Machine Learning internships, with an eye toward full-time ML engineering roles. If you see a potential fit — reach out. I respond quickly and I'm always ready to talk about ML, Python, and what I'm building next.</p>
         <div class="contact-cta-row">
           <a href="mailto:faiyazkhan.work@gmail.com" class="btn-primary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 4l10 9 10-9"/></svg>
             Send an Email
           </a>
-          <a href="#" class="btn-ghost" title="Download Resume" onclick="alert('Coming Soon! The updated resume will be available shortly.');return false;">
+          <a href="assets/Md_Faiyaz_Khan_Resume.pdf" target="_blank" rel="noopener" download class="btn-ghost" title="Download Resume">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
             </svg>
@@ -980,10 +1070,9 @@ body.light .mob-theme-btn .icon-moon{display:none}
       <div class="contact-looking">
         <span class="cl-label">Looking for</span>
         <div class="cl-tags">
+          <span class="cl-tag">Machine Learning Internship</span>
           <span class="cl-tag">ML Engineer</span>
           <span class="cl-tag">Data Scientist</span>
-          <span class="cl-tag">AI Intern</span>
-          <span class="cl-tag">Python Developer</span>
           <span class="cl-tag">Remote</span>
           <span class="cl-tag">Hybrid</span>
           <span class="cl-tag">Pan India</span>
@@ -996,7 +1085,7 @@ body.light .mob-theme-btn .icon-moon{display:none}
 <!-- FOOTER -->
 <footer>
   <div class="footer-l">&copy; 2026 Md Faiyaz Khan &nbsp;&middot;&nbsp; Machine Learning Engineer</div>
-  <div class="footer-r">Built with <span>Python</span> &amp; passion</div>
+  <div class="footer-r">Building <span>thoughtful</span> and <span>reliable</span> software</div>
 </footer>
 <script>
 /* ── CURSOR TORCH EFFECT ── */
@@ -1029,6 +1118,34 @@ function closeMobile() {
   toggle.querySelectorAll('span').forEach(x => { x.style.transform = ''; x.style.opacity = ''; });
   overlay.classList.remove('active');
 }
+
+/* ── HASH-FREE SECTION SCROLL ── */
+const sectionLinks = document.querySelectorAll('.nav-links a[href^="#"], .mobile-menu a[href^="#"]');
+sectionLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    const id = link.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth' });
+    sessionStorage.setItem('lastSection', id);
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  });
+});
+
+window.addEventListener('load', () => {
+  let targetId = sessionStorage.getItem('lastSection');
+  if (!targetId && window.location.hash) {
+    targetId = window.location.hash.slice(1);
+  }
+  if (targetId) {
+    const target = document.getElementById(targetId);
+    if (target) target.scrollIntoView({ behavior: 'instant' });
+  }
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+});
 
 /* ── NAVBAR MENU BEHAVIOUR ── */
 const navToggle = document.getElementById('navToggle');
@@ -1089,13 +1206,13 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* ── BACK TO TOP ── */
-const backTop = document.getElementById('back-top');
+/*const backTop = document.getElementById('back-top');
 window.addEventListener('scroll', () => {
   if (backTop) {
     if (window.scrollY > 400) backTop.classList.add('visible');
     else backTop.classList.remove('visible');
   }
-}, { passive: true });
+}, { passive: true });*/
 
 /* ── REVEAL ON SCROLL ── */
 const reveals = document.querySelectorAll('.reveal');
